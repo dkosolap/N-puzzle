@@ -5,6 +5,7 @@ import re
 
 from modules.matrix import *
 
+
 def check_unique_all(all_int_array, total):
 	correct_array = []
 	for x in range(0, total * total):
@@ -170,14 +171,20 @@ def validation():
 		print ("Please provide a file. Will generate a random one.")
 		return False
 
+def sravnenie(exc, res):
+	if (exc == res).all():
+		print("True")
+	else:
+		print("False")
 
 def main():
-	map = validation()
-	map = Matrix(map)
-	print(map)
-	map.moveRight()
-	map.moveTop()
-	print(map)
+	mat = validation()
+	res = [[1,2,3],[8,0,4],[7,6,5]]
+	mat = Matrix(mat)
+	res = Matrix(res)
+	print (res.matcmp(res))
+	print(res)
+	print(mat)
 
 
 
