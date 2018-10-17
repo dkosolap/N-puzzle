@@ -37,7 +37,9 @@ class Matrix:
 			self.matrix[self.y][self.x] = self.matrix[self.y][self.x + 1]
 			self.matrix[self.y][self.x + 1] = tmp
 			self.x += 1
-	def matcmp(self, exc):
+	def len(self):
+		return len(self.matrix)
+	def __eq__(self, exc):
 		return np.array_equal(self.matrix, exc.matrix)
 	def __str__(self):
 		res = ""

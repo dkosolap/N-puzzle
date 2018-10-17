@@ -6,6 +6,7 @@ class State():
 		self._g = 0
 		self._h = 0
 		self._f = 0
+		self._parent
 		
 	def getF():
 		return self._h + self._g
@@ -22,4 +23,19 @@ class State():
 	def setParent(parent):
 		self._parent = parent
 	def equals(exc):
+		pass
+
+
+	# Rules
+	def getNeighbors(currState):
+		# stateList
+		pass
+	def getDistance(aState, bState):
+		# int
+		pass
+	def getHRules(state):
+		# int
+		pass
+	def isTerminate(state):
+		# boolean
 		pass

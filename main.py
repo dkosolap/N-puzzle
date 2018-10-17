@@ -4,6 +4,8 @@ import sys
 import re
 
 from modules.matrix import *
+from modules.Astar import *
+from modules.Manhattan import *
 
 
 def check_unique_all(all_int_array, total):
@@ -180,11 +182,15 @@ def sravnenie(exc, res):
 def main():
 	mat = validation()
 	res = [[1,2,3],[8,0,4],[7,6,5]]
+
+	res = [[1,2,3],[4,5,6],[7,8,0]]
+	mat = [[1,2,7],[3,4,6],[0,8,5]]
+	
 	mat = Matrix(mat)
 	res = Matrix(res)
-	print (res.matcmp(res))
-	print(res)
-	print(mat)
+	# mat.moveLeft()
+	man = Manhattan(res)
+	print("res Hevristic", man.getH(mat))
 
 
 
