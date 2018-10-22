@@ -3,7 +3,7 @@ from modules.State import State
 class Manhattan:
 	def __init__(self, result):
 		self.result = result
-		self.len = result.len()
+		self.len = len(result.matrix)
 		self.len = (self.len * self.len)
 	def getH(self, state):
 		res = 0
