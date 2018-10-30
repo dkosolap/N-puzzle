@@ -52,8 +52,8 @@ class State():
 		if (currState != cp):
 			res.append(cp)
 		return res
-	def getDistance(aState, bState):
-		# int
+	def getDistance(self):
+		return 1
 		pass
 	def getHRules(state):
 		# int
@@ -90,25 +90,25 @@ class State():
 			self.matrix[self.y][self.x] = self.matrix[self.y - 1][self.x]
 			self.matrix[self.y - 1][self.x] = tmp
 			self.y -= 1
-			self._g += 1
+			# self._g += 1
 	def moveBottom(self):
 		if (self.y != self.size - 1):
 			tmp = self.matrix[self.y][self.x]
 			self.matrix[self.y][self.x] = self.matrix[self.y + 1][self.x]
 			self.matrix[self.y + 1][self.x] = tmp
 			self.y += 1
-			self._g += 1
+			# self._g += 1
 	def moveLeft(self):
 		if (self.x != 0):
 			tmp = self.matrix[self.y][self.x]
 			self.matrix[self.y][self.x] = self.matrix[self.y][self.x - 1]
 			self.matrix[self.y][self.x - 1] = tmp
 			self.x -= 1
-			self._g += 1
+			# self._g += 1
 	def moveRight(self):
 		if (self.x != self.size - 1):
 			tmp = self.matrix[self.y][self.x]
 			self.matrix[self.y][self.x] = self.matrix[self.y][self.x + 1]
 			self.matrix[self.y][self.x + 1] = tmp
 			self.x += 1
-			self._g += 1
+			# self._g += 1

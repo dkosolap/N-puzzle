@@ -10,13 +10,14 @@ class Astar:
 	def search(self, startState):
 		self.closeList = list()
 		self.openList = list()
-		self.openList.append(startState)
-		startState.setG(0)
+		startState.setG( 0 )
 		startState.setH(self.hevristik.getH(startState))
+		self.openList.append(startState)
 		# print(startState)
 
 		while (len(self.openList)):
 			current = self.getStateWithMinF(self.openList)
+
 			# if (self.rules.isFinish(current)):
 				# closeStateLen = len(closeList)
 				# return self.completeSolution(current)
@@ -26,18 +27,22 @@ class Astar:
 			for x in neighbors:
 				if (self.closeList.count(x)):
 					continue
-			# 	g = state.getG() + self.rules.getDistance(state, x)
-			# 	isGBetter = False
-			# 	if (openList.count(x) != -1):
-			# 		x.setH(self.rules.getG(x))
-			# 		openList.append(x)
-			# 		isGBetter = True
-			# 	else:
-			# 		isGBetter = g < x.getG() 
+				g = current.getG() + current.getDistance()
+				# print("gGlobe", g, current.getG(), current.getDistance())
+				isGBetter = False
+				if (self.openList.count(x) != -1):
+					x.setH( self.hevristik.getH(x) )
+					print("Here", x)
+					self.openList.append(x)
+					isGBetter = True
+			
+			print(len(self.openList))
+			return
+				# else:
+				# 	isGBetter = g < x.getG() 
 			# 	if isGBetter:
 			# 		x.setParent(state)
 			# 		x.setG(g)
-			return
 		return False
 
 	def getStateWithMinF(self, states):
