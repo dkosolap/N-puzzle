@@ -3,7 +3,7 @@
 import sys
 import re
 
-from modules.matrix import *
+# from modules.matrix import *
 from modules.Astar import *
 from modules.Manhattan import *
 
@@ -189,10 +189,11 @@ def main():
 	astar = Astar(res)
 	resList = astar.search(start)
 	for x in resList:
+		# x.mathHash()
 		print(x)
 	print("Result state\n", res)
 	print("Total state: ", astar.totalSize)
-	print("Max state: ", astar.totalSize)
+	print("Max state: ", astar.maxSize)
 	print("Step: ", len(resList))
 
 
