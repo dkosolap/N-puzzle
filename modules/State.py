@@ -7,7 +7,7 @@ class State():
 		self.matrix = matrix
 		self.y, self.x = self.getCoordinate()
 		self.size = len(matrix)
-
+		self._parent = False
 		self._g = 0
 		self._h = 0
 		self._f = 0
@@ -40,11 +40,11 @@ class State():
 		if (currState != cp):
 			res.append(cp)
 		cp = State(copy.deepcopy(currState.matrix))
-		cp.moveRight()
+		cp.moveBottom()
 		if (currState != cp):
 			res.append(cp)
 		cp = State(copy.deepcopy(currState.matrix))
-		cp.moveBottom()
+		cp.moveRight()
 		if (currState != cp):
 			res.append(cp)
 		cp = State(copy.deepcopy(currState.matrix))
@@ -54,13 +54,6 @@ class State():
 		return res
 	def getDistance(self):
 		return 1
-		pass
-	def getHRules(state):
-		# int
-		pass
-	def isTerminate(state):
-		# boolean
-		pass
 
 
 	def __str__(self):

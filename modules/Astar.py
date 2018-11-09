@@ -5,6 +5,9 @@ from modules.Manhattan import *
 class Astar:
 	def __init__(self, res):
 		self.hevristik = Manhattan(res)
+		self.totalSize = 0
+		self.maxSize = 0
+		self.res = res
 		pass
 
 	def search(self, startState):
@@ -17,10 +20,10 @@ class Astar:
 
 		while (len(self.openList)):
 			current = self.getStateWithMinF(self.openList)
-
-			# if (self.rules.isFinish(current)):
+			# print(len(self.openList), len(self.closeList))
+			if (self.res == current):
 				# closeStateLen = len(closeList)
-				# return self.completeSolution(current)
+				return self.completeSolution(current.getParent())
 			self.openList.remove(current)
 			self.closeList.append(current)
 			neighbors = current.getNeighbors()
@@ -28,21 +31,23 @@ class Astar:
 				if (self.closeList.count(x)):
 					continue
 				g = current.getG() + current.getDistance()
-				# print("gGlobe", g, current.getG(), current.getDistance())
-				isGBetter = False
-				if (self.openList.count(x) != -1):
+				isGBetter = False 
+				tmp = self.openList.count(x)
+				# print(tmp)
+				if (tmp != -1):
 					x.setH( self.hevristik.getH(x) )
-					print("Here", x)
 					self.openList.append(x)
+					self.totalSize += 1
+					count = len(self.openList)
+					if (count > self.maxSize):
+						self.maxSize = count
 					isGBetter = True
-			
-			print(len(self.openList))
-			return
-				# else:
-				# 	isGBetter = g < x.getG() 
-			# 	if isGBetter:
-			# 		x.setParent(state)
-			# 		x.setG(g)
+				else:
+					isGBetter = g < x.getG() 
+			# return
+				if isGBetter:
+					x.setParent(current)
+					x.setG(g)
 		return False
 
 	def getStateWithMinF(self, states):
@@ -55,7 +60,11 @@ class Astar:
 		return res
 
 	def completeSolution(self, state):
-		return state
+		resList = list()
+		while(state.getParent()):
+			resList.append(state)
+			state = state.getParent()
+		return resList
 
 
 		

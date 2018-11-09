@@ -182,26 +182,18 @@ def sravnenie(exc, res):
 def main():
 	mat = validation()
 	res = [[1,2,3],[8,0,4],[7,6,5]]
-
-	# res = [
-	# 	[1,2,3],
-	# 	[4,5,6],
-	# 	[7,8,0]
-	# 	]
-	# mat = [
-	# 	[1,2,7],
-	# 	[3,4,6],
-	# 	[0,8,5]
-	# 	]
-	
 	start = State(mat)
 	res = State(res)
-	# print("res Hevristic", man.getH(mat))
+	print("Start state\n", start)
 
 	astar = Astar(res)
-	astar.search(start)
-
-
+	resList = astar.search(start)
+	for x in resList:
+		print(x)
+	print("Result state\n", res)
+	print("Total state: ", astar.totalSize)
+	print("Max state: ", astar.totalSize)
+	print("Step: ", len(resList))
 
 
 
