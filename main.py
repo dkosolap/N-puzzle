@@ -98,6 +98,13 @@ def is_solvable(total, current_state):
 			return True
 		else:
 			return False
+	elif (total == 5):
+		current_state.remove(0)
+		final_state = [1, 2, 3, 4, 5, 16, 17, 18, 19, 6, 15, 24, 20, 7, 14, 23, 22, 21, 8, 13, 12, 11, 10, 9]
+		if (count_inversions(final_state, current_state) % 2) == 0:
+			return True
+		else:
+			return False
 
 def validation():
 
@@ -127,6 +134,15 @@ def validation():
 			exit()
 		else:
 			total = int(line.strip())
+			if (total < 3 or total > 5):
+				print ("Invalid total")
+				exit()
+			if (total == 3):
+				desired = [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
+			elif (total == 4):
+				desired =  [[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]]
+			elif (total == 5):
+				desired =  [[1, 2, 3, 4, 5], [16, 17, 18, 19, 6], [15, 24, 0, 20, 7], [14, 23, 22, 21, 8], [13, 12, 11, 10, 9]]
 
 		final_array = []
 		for line in input_array[totals_index + 1:]:
@@ -165,7 +181,7 @@ def validation():
 			for line in int_array:
 					final_int_array.append(list(map(int, line)))
 			if is_solvable(total, one_int_array):
-				return(final_int_array)
+				return(desired, final_int_array)
 			else:
 				print("Unsolvable puzzle")
 				exit()
@@ -180,21 +196,24 @@ def sravnenie(exc, res):
 		print("False")
 
 def main():
-	mat = validation()
-	res = [[1,2,3],[8,0,4],[7,6,5]]
+	res, mat = validation()
+	 # = [[1,2,3],[8,0,4],[7,6,5]]
 	start = State(mat)
 	res = State(res)
-	print("Start state\n", start)
+	print(res)
+	
 
 	astar = Astar(res)
 	resList = astar.search(start)
+
+	
+	print("Total number of states in open set(complexity in time): ", astar.totalSize)
+	print("Maximum number of states in memory (complexity in size): ", astar.maxSize)
+	print("Total number of moves: ", len(resList) + 1)
+	print("Start state\n", start)
 	for x in resList:
 		print(x)
 	print("Result state\n", res)
-	print("Total state: ", astar.totalSize)
-	print("Max state: ", astar.totalSize)
-	print("Step: ", len(resList))
-
 
 
 
