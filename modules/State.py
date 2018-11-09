@@ -1,6 +1,8 @@
 from modules.Color import *
 import numpy as np
 import copy
+import hashlib
+
 
 class State():
 	def __init__(self, matrix, count=0):
@@ -11,6 +13,7 @@ class State():
 		self._g = 0
 		self._h = 0
 		self._f = 0
+		self.hash = self.hashMatrix()
 		# self._parent
 		
 	def getF(self):
@@ -32,15 +35,15 @@ class State():
 	def __eq__(self, exc):
 		return np.array_equal(self.matrix, exc.matrix)
 
-	# Rules
+
 	def getNeighbors(currState):
 		res = list()
 		cp = State(copy.deepcopy(currState.matrix))
-		cp.moveTop()
+		cp.moveLeft()
 		if (currState != cp):
 			res.append(cp)
 		cp = State(copy.deepcopy(currState.matrix))
-		cp.moveBottom()
+		cp.moveTop()
 		if (currState != cp):
 			res.append(cp)
 		cp = State(copy.deepcopy(currState.matrix))
@@ -48,7 +51,7 @@ class State():
 		if (currState != cp):
 			res.append(cp)
 		cp = State(copy.deepcopy(currState.matrix))
-		cp.moveLeft()
+		cp.moveBottom()
 		if (currState != cp):
 			res.append(cp)
 		return res
@@ -70,8 +73,14 @@ class State():
 			res += "\n"
 		return res
 
-
-
+# 	=================================
+	def 	hashMatrix( self ):
+		res = str(self.size)
+		for x in self.matrix:
+			for y in x:
+				res += str(y)
+		return res
+# 	=================================
 	def getCoordinate(self):
 		for i, x in enumerate(self.matrix):
 			for j, y in enumerate(x):
@@ -83,6 +92,8 @@ class State():
 			self.matrix[self.y][self.x] = self.matrix[self.y - 1][self.x]
 			self.matrix[self.y - 1][self.x] = tmp
 			self.y -= 1
+			self.hash = self.hashMatrix()
+			
 			# self._g += 1
 	def moveBottom(self):
 		if (self.y != self.size - 1):
@@ -90,6 +101,8 @@ class State():
 			self.matrix[self.y][self.x] = self.matrix[self.y + 1][self.x]
 			self.matrix[self.y + 1][self.x] = tmp
 			self.y += 1
+			self.hash = self.hashMatrix()
+			
 			# self._g += 1
 	def moveLeft(self):
 		if (self.x != 0):
@@ -97,6 +110,8 @@ class State():
 			self.matrix[self.y][self.x] = self.matrix[self.y][self.x - 1]
 			self.matrix[self.y][self.x - 1] = tmp
 			self.x -= 1
+			self.hash = self.hashMatrix()
+			
 			# self._g += 1
 	def moveRight(self):
 		if (self.x != self.size - 1):
@@ -104,4 +119,6 @@ class State():
 			self.matrix[self.y][self.x] = self.matrix[self.y][self.x + 1]
 			self.matrix[self.y][self.x + 1] = tmp
 			self.x += 1
+			self.hash = self.hashMatrix()
+			
 			# self._g += 1
