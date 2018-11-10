@@ -4,6 +4,8 @@ import copy
 import hashlib
 
 
+
+
 class State():
 	def __init__(self, matrix, count=0):
 		self.matrix = matrix
@@ -37,6 +39,7 @@ class State():
 
 
 	def getNeighbors(currState):
+		# print ("yooo", currState)
 		res = list()
 		cp = State(copy.deepcopy(currState.matrix))
 		cp.moveLeft()
