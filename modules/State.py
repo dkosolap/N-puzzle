@@ -3,9 +3,6 @@ import numpy as np
 import copy
 import hashlib
 
-
-
-
 class State():
 	def __init__(self, matrix, count=0):
 		self.matrix = matrix
@@ -39,7 +36,6 @@ class State():
 
 
 	def getNeighbors(currState):
-		# print ("yooo", currState)
 		res = list()
 		cp = State(copy.deepcopy(currState.matrix))
 		cp.moveLeft()
@@ -63,7 +59,7 @@ class State():
 
 
 	def __str__(self):
-		res = ("F:" + str(self.getF()) + " H:" + str(self._h) + " G:" + str(self._g) + "\n")
+		res = "\n"#("F:" + str(self.getF()) + " H:" + str(self._h) + " G:" + str(self._g) + "\n")
 		for x in self.matrix:
 			for y in x:
 				if y < 10:

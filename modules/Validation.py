@@ -12,7 +12,7 @@ import random
 
 def generate_martix(desired):
 	cp = State(copy.deepcopy(desired))
-	for x in range(0, 9):
+	for x in range(10, 1000):
 		i = random.randint(1, 100)
 		if (i % 4 == 0):
 			cp.moveLeft()

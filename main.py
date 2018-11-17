@@ -16,13 +16,19 @@ def main():
 	start = State(mat)
 	res = State(res)	
 	astar = Astar(res)
-	resList = astar.search(start)
+
+	if (start == res):
+		resList = list()
+	else:
+		resList = astar.search(start)
 
 	
 	print("Complexity in time: ", astar.totalSize)
 	print("Complexity in size: ", astar.maxSize)
 	print("Number of moves from initial state to solution: ", len(resList) + 1)
 	print("Start state\n", start)
+
+	resList.reverse()
 	for x in resList:
 		print(x)
 	print("Result state\n", res)
