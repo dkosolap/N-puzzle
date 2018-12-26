@@ -63,10 +63,10 @@ class State():
 		for x in self.matrix:
 			for y in x:
 				if y < 10:
-					if y == 0:
-						res += " " + bcolors.OKGREEN + str(y) + bcolors.ENDC + " "
-					else:
-						res += " " + str(y) + " "
+					# if y == 0:
+						# res += " " + bcolors.OKGREEN + str(y) + bcolors.ENDC + " "
+					# else:
+					res += " " + str(y) + " "
 				else:
 					res += str(y) + " "
 			res += "\n"

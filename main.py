@@ -29,8 +29,8 @@ def main():
 	print("Start state\n", start)
 
 	resList.reverse()
-	for x in resList:
-		print(x)
+	# for x in resList:
+		# print(x)
 	print("Result state\n", res)
 
 

@@ -2,10 +2,12 @@
 
 from modules.State import *
 from modules.Manhattan import *
+from modules.LinearConflict import *
+
 
 class Astar:
 	def __init__(self, res):
-		self.hevristik = Manhattan(res)
+		self.hevristik = LinearConflict(res)
 		self.totalSize = 0
 		self.maxSize = 0
 		self.res = res
