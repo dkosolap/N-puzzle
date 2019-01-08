@@ -127,7 +127,13 @@ def validation():
 	num_lines = 0
 	total = -1
 
-	if len(sys.argv) == 2:
+	if len(sys.argv) == 2 or len(sys.argv) == 3:
+		flag = "-m"
+		if len(sys.argv) == 3:
+			flag = sys.argv[2]
+			if (sys.argv[2] != "-m") and (sys.argv[2] != "-lc") and (sys.argv[2] != "-ct"):
+				print ("Error: Wrong flag.")
+				exit()
 		input_array = []
 		try:
 			with open(sys.argv[1], "r") as f:
@@ -195,9 +201,9 @@ def validation():
 		final_int_array = []
 		if (check_els(one_int_array, total)):
 			for line in int_array:
-					final_int_array.append(list(map(int, line)))
+				final_int_array.append(list(map(int, line)))
 			if is_solvable(total, one_int_array):
-				return(desired, final_int_array)
+				return(desired, final_int_array, flag)
 			else:
 				print("Unsolvable puzzle")
 				exit()

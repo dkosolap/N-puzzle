@@ -12,10 +12,10 @@ import random
 
 
 def main():
-	res, mat = validation()
+	res, mat, flag = validation()
 	start = State(mat)
-	res = State(res)	
-	astar = Astar(res)
+	res = State(res)
+	astar = Astar(res, flag)
 
 	if (start == res):
 		resList = list()

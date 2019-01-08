@@ -3,11 +3,20 @@
 from modules.State import *
 from modules.Manhattan import *
 from modules.LinearConflict import *
+from modules.CornerTiles import *
 
 
 class Astar:
-	def __init__(self, res):
-		self.hevristik = LinearConflict(res)
+	def __init__(self, res, flag):
+		if flag == "-ct":
+			print("Corner tiles")
+			self.hevristik = CornerTiles(res)
+		elif flag == "-lc":
+			print("Linear conflict")
+			self.hevristik = LinearConflict(res)
+		else:
+			print("Manhattan distance")
+			self.hevristik = Manhattan(res)
 		self.totalSize = 0
 		self.maxSize = 0
 		self.res = res
