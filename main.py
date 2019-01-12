@@ -9,10 +9,8 @@ from modules.Validation import *
 from modules.State import *
 import random
 
-
-
 def main():
-	res, mat, flag = validation()
+	res, mat, flag, step = validation()
 	start = State(mat)
 	res = State(res)
 	astar = Astar(res, flag)
@@ -29,12 +27,10 @@ def main():
 	print("Start state\n", start)
 
 	resList.reverse()
-	# for x in resList:
-		# print(x)
+	if (step):
+		for x in resList:
+			print(x)
 	print("Result state\n", res)
-
-
-
 
 if __name__ == "__main__":
     main()

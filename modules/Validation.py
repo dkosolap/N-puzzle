@@ -12,7 +12,7 @@ import random
 
 def generate_martix(desired):
 	cp = State(copy.deepcopy(desired))
-	for x in range(10, 1000):
+	for x in range(10, 100):
 		i = random.randint(1, 100)
 		if (i % 4 == 0):
 			cp.moveLeft()
@@ -126,12 +126,25 @@ def validation():
 
 	num_lines = 0
 	total = -1
+	flag = "-m"
+	step = False
 
-	if len(sys.argv) == 2 or len(sys.argv) == 3:
-		flag = "-m"
+	if len(sys.argv) >= 2 and len(sys.argv) <= 4:
 		if len(sys.argv) == 3:
-			flag = sys.argv[2]
-			if (sys.argv[2] != "-m") and (sys.argv[2] != "-lc") and (sys.argv[2] != "-ct"):
+			if (sys.argv[2] == "-s"):
+				 step = True
+			else:
+				flag = sys.argv[2]
+				if (sys.argv[2] != "-m") and (sys.argv[2] != "-lc") and (sys.argv[2] != "-ct"):
+					print ("Error: Wrong flag.")
+					exit()
+		elif (len(sys.argv) == 4):
+			step = True
+			if (sys.argv[2] == "-s"):
+				 flag = sys.argv[3]
+			else:
+				flag = sys.argv[2]
+			if (flag != "-m") and (flag != "-lc") and (flag != "-ct"):
 				print ("Error: Wrong flag.")
 				exit()
 		input_array = []
@@ -175,7 +188,7 @@ def validation():
 		int_line = []
 		i = 0
 		for line in final_array:
-			line = re.sub( '\s+', ' ', line).strip()
+			line = re.sub( "\s+", ' ', line).strip()
 			if line.strip().count(' ') != total - 1:
 				print("Invalid puzzle - wrong width")
 				exit()
@@ -202,18 +215,23 @@ def validation():
 		if (check_els(one_int_array, total)):
 			for line in int_array:
 				final_int_array.append(list(map(int, line)))
-			if is_solvable(total, one_int_array):
-				return(desired, final_int_array, flag)
-			else:
-				print("Unsolvable puzzle")
-				exit()
+			# if is_solvable(total, one_int_array):
+			return(desired, final_int_array, flag, step)
+			# else:
+				# print("Unsolvable puzzle")
+				# exit()
 	elif len(sys.argv) == 1:
-		print ("Please provide a file. Will generate a random one.")
-		desired = [[1, 2, 3], [8, 0, 4], [7, 6, 5]]
+		print (bcolors.FAIL + "Please provide a file. Will generate a random one.")
+		print (bcolors.WARNING + "python3 main.py <map> -m | -lc | -ct")
+		print (bcolors.OKBLUE + " -m   Manhattan distance")
+		print (" -lc  Linear conflict")
+		print (" -ct  Corner tiles" + bcolors.ENDC)
+		desired = [[1, 2, 3, 4], [12, 13, 14, 5], [11, 0, 15, 6], [10, 9, 8, 7]]
 		final_int_array = generate_martix(desired)
-		return(desired, final_int_array)
+		return(desired, final_int_array, flag, step)
 	else:
 		print ("Error. Too many args.")
+		exit()
 		return False
 
 def sravnenie(exc, res):

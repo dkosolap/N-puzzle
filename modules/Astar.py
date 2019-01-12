@@ -32,6 +32,7 @@ class Astar:
 			current = self.getStateWithMinF(self.openList)
 			if (self.res == current):
 				return self.completeSolution(current.getParent())
+			# print(len(self.openList))
 			del self.openList[current.hash]
 			closeSet[current.hash] = current
 			neighbors = current.getNeighbors()
@@ -41,7 +42,7 @@ class Astar:
 				g = current.getG() + current.getDistance()
 				isGBetter = False 
 				if not neighbor.hash in self.openList:
-					neighbor.setH( self.hevristik.getH(neighbor) )
+					neighbor.setH( self.hevristik.getH(neighbor))
 					self.openList[neighbor.hash] = neighbor
 					self.totalSize += 1
 					count = len(self.openList)
