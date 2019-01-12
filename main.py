@@ -20,6 +20,10 @@ def main():
 	else:
 		resList = astar.search(start)
 
+	if ( not resList):
+		print(bcolors.FAIL + "Unsolvable puzzle!" + bcolors.ENDC)
+		exit()
+		
 	
 	print("Complexity in time: ", astar.totalSize)
 	print("Complexity in size: ", astar.maxSize)
